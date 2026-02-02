@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع مساعدة التلاميذ - الإجابة على الأسئلة الدراسية</title>
+    <meta name="description" content="موقع متخصص لمساعدة التلاميذ في الإجابة على الأسئلة الدراسية في جميع المواد">
+    <meta name="keywords" content="مساعدة دراسية, أسئلة, إجابات, تلاميذ, تعليم, دروس">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3B82F6",
+                        secondary: "#10B981",
+                        accent: "#F59E0B",
+                        dark: "#1F2937",
+                        light: "#F9FAFB"
+                    },
+                    fontFamily: {
+                        'cairo': ['Cairo', 'sans-serif']
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 font-cairo">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 space-x-reverse mb-4 md:mb-0">
+                    <div class="bg-primary text-white p-3 rounded-full">
+                        <i class="fas fa-graduation-cap text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-dark">مساعدة التلاميذ</h1>
+                        <p class="text-gray-600 text-sm">موقع الإجابات الدراسية</p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="flex flex-wrap justify-center gap-4 md:gap-6">
+                    <a href="#" class="nav-link text-dark hover:text-primary transition-colors duration-300" onclick="navigateTo('home')">الرئيسية</a>
+                    <a href="#" class="nav-link text-dark hover:text-primary transition-colors duration-300" onclick="navigateTo('subjects')">المواد الدراسية</a>
+                    <a href="#" class="nav-link text-dark hover:text-primary transition-colors duration-300" onclick="navigateTo('ask')">اطرح سؤالاً</a>
+                    <a href="#" class="nav-link text-dark hover:text-primary transition-colors duration-300" onclick="navigateTo('faq')">الأسئلة الشائعة</a>
+                    <a href="#" class="nav-link text-dark hover:text-primary transition-colors duration-300" onclick="navigateTo('contact')">اتصل بنا</a>
+                </nav>
+
+                <!-- Search -->
+                <div class="mt-4 md:mt-0 w-full md:w-auto">
+                    <div class="relative">
+                        <input type="text" 
+                               placeholder="ابحث عن سؤال..." 
+                               class="w-full md:w-64 px-4 py-2 pr-10 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <button class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="py-12 bg-gradient-to-l from-primary to-secondary text-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col lg:flex-row items-center justify-between">
+                    <div class="lg:w-1/2 mb-10 lg:mb-0">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6">مرحباً بكم في موقع مساعدة التلاميذ</h2>
+                        <p class="text-xl mb-8 opacity-90">نحن هنا لمساعدتك في فهم دروسك والإجابة على جميع أسئلتك الدراسية في مختلف المواد</p>
+                        <div class="flex flex-wrap gap-4">
+                            <button onclick="navigateTo('ask')" class="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-300 shadow-lg">
+                                <i class="fas fa-question-circle ml-2"></i> اطرح سؤالك الآن
+                            </button>
+                            <button onclick="navigateTo('subjects')" class="bg-transparent border-2 border-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primary transition-colors duration-300">
+                                <i class="fas fa-book ml-2"></i> استعرض المواد
+                            </button>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 flex justify-center">
+                        <img src="https://picsum.photos/500/350?random=1" 
+                             alt="طلاب يدرسون معاً" 
+                             class="rounded-2xl shadow-2xl"
+                             loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subjects Section -->
+        <section id="subjects" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-dark mb-12">المواد الدراسية</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Subject Cards -->
+                    <div class="subject-card bg-light rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border-r-4 border-primary">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-primary text-white p-3 rounded-full ml-4">
+                                <i class="fas fa-calculator text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark">الرياضيات</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">أسئلة وإجابات في جميع فروع الرياضيات من الجبر إلى الهندسة</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">١٥٠٠ سؤال</span>
+                            <button onclick="navigateTo('math')" class="text-primary hover:text-secondary font-semibold">
+                                استعرض الأسئلة <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="subject-card bg-light rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border-r-4 border-secondary">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-secondary text-white p-3 rounded-full ml-4">
+                                <i class="fas fa-flask text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark">العلوم</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">تجارب ونظريات علمية مع شرح مفصل لكل مفهوم</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">١٢٠٠ سؤال</span>
+                            <button onclick="navigateTo('science')" class="text-primary hover:text-secondary font-semibold">
+                                استعرض الأسئلة <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="subject-card bg-light rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border-r-4 border-accent">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-accent text-white p-3 rounded-full ml-4">
+                                <i class="fas fa-language text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark">اللغة العربية</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">قواعد اللغة، النصوص الأدبية، والتعبير الكتابي</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">٩٠٠ سؤال</span>
+                            <button onclick="navigateTo('arabic')" class="text-primary hover:text-secondary font-semibold">
+                                استعرض الأسئلة <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="subject-card bg-light rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border-r-4 border-purple-500">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-purple-500 text-white p-3 rounded-full ml-4">
+                                <i class="fas fa-globe text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark">اللغة الإنجليزية</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">قواعد اللغة، مفردات، وتمارين محادثة</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">١١٠٠ سؤال</span>
+                            <button onclick="navigateTo('english')" class="text-primary hover:text-secondary font-semibold">
+                                استعرض الأسئلة <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="subject-card bg-light rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border-r-4 border-red-500">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-red-500 text-white p-3 rounded-full ml-4">
+                                <i class="fas fa-landmark text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark">الدراسات الاجتماعية</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">تاريخ، جغرافيا، وتربية وطنية</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">٨٠٠ سؤال</span>
+                            <button onclick="navigateTo('social')" class="text-primary hover:text-secondary font-semibold">
+                                استعرض الأسئلة <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="subject-card bg-light rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border-r-4 border-green-500">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-green-500 text-white p-3 rounded-full ml-4">
+                                <i class="fas fa-code text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark">الحاسوب</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">برمجة، أنظمة تشغيل، وتطبيقات مكتبية</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">٧٠٠ سؤال</span>
+                            <button onclick="navigateTo('computer')" class="text-primary hover:text-secondary font-semibold">
+                                استعرض الأسئلة <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ask Question Section -->
+        <section id="ask" class="py-16 bg-light">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-dark mb-12">اطرح سؤالك</h2>
+                <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl p-8">
+                    <form id="questionForm" class="space-y-6">
+                        <div>
+                            <label for="subject" class="block text-dark font-semibold mb-2">المادة الدراسية</label>
+                            <select id="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <option value="">اختر المادة الدراسية</option>
+                                <option value="math">الرياضيات</option>
+                                <option value="science">العلوم</option>
+                                <option value="arabic">اللغة العربية</option>
+                                <option value="english">اللغة الإنجليزية</option>
+                                <option value="social">الدراسات الاجتماعية</option>
+                                <option value="computer">الحاسوب</option>
+                                <option value="other">مادة أخرى</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="grade" class="block text-dark font-semibold mb-2">الصف الدراسي</label>
+                            <select id="grade" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <option value="">اختر الصف الدراسي</option>
+                                <option value="1">الصف الأول</option>
+                                <option value="2">الصف الثاني</option>
+                                <option value="3">الصف الثالث</option>
+                                <option value="4">الصف الرابع</option>
+                                <option value="5">الصف الخامس</option>
+                                <option value="6">الصف السادس</option>
+                                <option value="7">الصف السابع</option>
+                                <option value="8">الصف الثامن</option>
+                                <option value="9">الصف التاسع</option>
+                                <option value="10">الصف العاشر</option>
+                                <option value="11">الصف الحادي عشر</option>
+                                <option value="12">الصف الثاني عشر</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="question" class="block text-dark font-semibold mb-2">سؤالك</label>
+                            <textarea id="question" 
+                                      rows="6" 
+                                      placeholder="اكتب سؤالك هنا بالتفصيل..." 
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"></textarea>
+                        </div>
+
+                        <div>
+                            <label for="image" class="block text-dark font-semibold mb-2">إضافة صورة (اختياري)</label>
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-primary transition-colors duration-300">
+                                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                                <p class="text-gray-600 mb-2">اسحب وأفلت الصورة هنا أو انقر للاختيار</p>
+                                <input type="file" id="image" accept="image/*" class="hidden">
+                                <button type="button" onclick="document.getElementById('image').click()" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300">
+                                    اختر صورة
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <input type="checkbox" id="anonymous" class="ml-2 h-5 w-5 text-primary rounded focus:ring-primary">
+                            <label for="anonymous" class="text-gray-600">نشر السؤال بشكل مجهول</label>
+                        </div>
+
+                        <button type="submit" class="w-full bg-primary text-white py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors duration-300 shadow-lg">
+                            <i class="fas fa-paper-plane ml-2"></i> إرسال السؤال
+                        </button>
+
+                        <p class="text-center text-gray-600 text-sm">
+                            سنقوم بالرد على سؤالك خلال ٢٤ ساعة كحد أقصى
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-dark mb-12">الأسئلة الشائعة</h2>
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <!-- FAQ Items -->
+                    <div class="faq-item bg-light rounded-xl p-6 shadow-md">
+                        <div class="flex justify-between items-center cursor-pointer" onclick="toggleFAQ(1)">
+                            <h3 class="text-xl font-semibold text-dark">كيف يمكنني الحصول على إجابة لسؤالي؟</h3>
+                            <i class="fas fa-chevron-down text-primary text-xl transition-transform duration-300" id="faq-icon-1"></i>
+                        </div>
+                        <div class="faq-content mt-4 text-gray-600 hidden" id="faq-content-1">
+                            <p>يمكنك الحصول على إجابة لسؤالي من خلال:</p>
+                            <ol class="list-decimal mr-4 mt-2 space-y-2">
+                                <li>استخدام مربع البحث للبحث عن سؤال مشابه</li>
+                                <li>تصفح الأسئلة في قسم المواد الدراسية</li>
+                                <li>إرسال سؤالك الجديد من خلال نموذج "اطرح سؤالاً"</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-light rounded-xl p-6 shadow-md">
+                        <div class="flex justify-between items-center cursor-pointer" onclick="toggleFAQ(2)">
+                            <h3 class="text-xl font-semibold text-dark">كم تستغرق الإجابة على السؤال؟</h3>
+                            <i class="fas fa-chevron-down text-primary text-xl transition-transform duration-300" id="faq-icon-2"></i>
+                        </div>
+                        <div class="faq-content mt-4 text-gray-600 hidden" id="faq-content-2">
+                            <p>نحن نعمل على الإجابة على جميع الأسئلة خلال ٢٤ ساعة كحد أقصى. الأسئلة البسيطة قد تحصل على إجابة خلال ساعات قليلة، بينما الأسئلة المعقدة قد تحتاج إلى وقت أطول قليلاً.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-light rounded-xl p-6 shadow-md">
+                        <div class="flex justify-between items-center cursor-pointer" onclick="toggleFAQ(3)">
+                            <h3 class="text-xl font-semibold text-dark">هل الخدمة مجانية؟</h3>
+                            <i class="fas fa-chevron-down text-primary text-xl transition-transform duration-300" id="faq-icon-3"></i>
+                        </div>
+                        <div class="faq-content mt-4 text-gray-600 hidden" id="faq-content-3">
+                            <p>نعم، الخدمة مجانية بالكامل لجميع التلاميذ. نحن نؤمن بحق كل تلميذ في الحصول على المساعدة التعليمية التي يحتاجها.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-light rounded-xl p-6 shadow-md">
+                        <div class="flex justify-between items-center cursor-pointer" onclick="toggleFAQ(4)">
+                            <h3 class="text-xl font-semibold text-dark">من يجيب على الأسئلة؟</h3>
+                            <i class="fas fa-chevron-down text-primary text-xl transition-transform duration-300" id="faq-icon-4"></i>
+                        </div>
+                        <div class="faq-content mt-4 text-gray-600 hidden" id="faq-content-4">
+                            <p>يتم الإجابة على الأسئلة من قبل:</p>
+                            <ul class="list-disc mr-4 mt-2 space-y-2">
+                                <li>معلمين مؤهلين في مختلف التخصصات</li>
+                                <li>طلاب جامعيين متخصصين</li>
+                                <li>متطوعين من ذوي الخبرة التعليمية</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-light rounded-xl p-6 shadow-md">
+                        <div class="flex justify-between items-center cursor-pointer" onclick="toggleFAQ(5)">
+                            <h3 class="text-xl font-semibold text-dark">هل يمكنني طرح أسئلة في جميع المواد؟</h3>
+                            <i class="fas fa-chevron-down text-primary text-xl transition-transform duration-300" id="faq-icon-5"></i>
+                        </div>
+                        <div class="faq-content mt-4 text-gray-600 hidden" id="faq-content-5">
+                            <p>نعم، يمكنك طرح أسئلة في جميع المواد الدراسية من الصف الأول إلى الصف الثاني عشر. نحن نغطي جميع المناهج الدراسية المعتمدة.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Questions -->
+        <section class="py-16 bg-gradient-to-r from-light to-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-dark mb-12">آخر الأسئلة</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Question Cards -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="bg-primary text-white text-sm px-3 py-1 rounded-full">رياضيات</span>
+                                <span class="text-gray-500 text-sm">قبل ساعتين</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark mb-3">كيف أحل معادلة من الدرجة الثانية؟</h3>
+                            <p class="text-gray-600 mb-4">أحتاج إلى شرح طريقة حل المعادلات التربيعية باستخدام المميز...</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500">الصف التاسع</span>
+                                <button class="text-primary hover:text-secondary font-semibold">
+                                    عرض الإجابة <i class="fas fa-arrow-left"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="bg-secondary text-white text-sm px-3 py-1 rounded-full">علوم</span>
+                                <span class="text-gray-500 text-sm">قبل ٥ ساعات</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark mb-3">ما هي عملية البناء الضوئي؟</h3>
+                            <p class="text-gray-600 mb-4">أريد شرحاً مفصلاً لعملية البناء الضوئي في النباتات...</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500">الصف السادس</span>
+                                <button class="text-primary hover:text-secondary font-semibold">
+                                    عرض الإجابة <i class="fas fa-arrow-left"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="bg-accent text-white text-sm px-3 py-1 rounded-full">لغة عربية</span>
+                                <span class="text-gray-500 text-sm">قبل يوم</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark mb-3">ما الفرق بين كان وأخواتها وإن وأخواتها؟</h3>
+                            <p class="text-gray-600 mb-4">أحتاج إلى شرح الفرق مع أمثلة توضيحية...</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500">الصف الثامن</span>
+                                <button class="text-primary hover:text-secondary font-semibold">
+                                    عرض الإجابة <i class="fas fa-arrow-left"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-dark mb-12">اتصل بنا</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Contact Info -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-dark mb-8">معلومات التواصل</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-primary text-white p-3 rounded-full ml-4">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-dark">البريد الإلكتروني</h4>
+                                    <p class="text-gray-600">support@talameed-help.com</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="bg-secondary text-white p-3 rounded-full ml-4">
+                                    <i class="fas fa-phone text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-dark">الهاتف</h4>
+                                    <p class="text-gray-600">+٩٦٥ ١٢٣٤٥٦٧٨٩</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="bg-accent text-white p-3 rounded-full ml-4">
+                                    <i class="fas fa-clock text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-dark">ساعات العمل</h4>
+                                    <p class="text-gray-600">الأحد - الخميس: ٨ صباحاً - ٨ مساءً</p>
+                                    <p class="text-gray-600">الجمعة والسبت: ١٠ صباحاً - ٤ مساءً</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-12">
+                            <h4 class="font-semibold text-dark mb-4">تابعنا على</h4>
+                            <div class="flex space-x-4 space-x-reverse">
+                                <a href="#" class="social-icon bg-primary text-white p-3 rounded-full hover:bg-blue-700 transition-colors duration-300">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="social-icon bg-blue-400 text-white p-3 rounded-full hover:bg-blue-500 transition-colors duration-300">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="social-icon bg-pink-600 text-white p-3 rounded-full hover:bg-pink-700 transition-colors duration-300">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="social-icon bg-blue-700 text-white p-3 rounded-full hover:bg-blue-800 transition-colors duration-300">
+                                    <i class="fab fa-telegram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="bg-light rounded-2xl p-8 shadow-lg">
+                        <h3 class="text-2xl font-bold text-dark mb-8">أرسل رسالة</h3>
+                        <form class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-dark font-semibold mb-2">الاسم الكامل</label>
+                                    <input type="text" 
+                                           id="name" 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-dark font-semibold mb-2">البريد الإلكتروني</label>
+                                    <input type="email" 
+                                           id="email" 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-dark font-semibold mb-2">الرسالة</label>
+                                <textarea id="message" 
+                                          rows="5" 
+                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-primary text-white py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors duration-300 shadow-lg">
+                                <i class="fas fa-paper-plane ml-2"></i> إرسال الرسالة
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- About -->
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="bg-white text-primary p-2 rounded-full ml-3">
+                            <i class="fas fa-graduation-cap text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">مساعدة التلاميذ</h3>
+                    </div>
+                    <p class="text-gray-300">منصة تعليمية تهدف إلى مساعدة التلاميذ في فهم دروسهم والإجابة على أسئلتهم الدراسية في جميع المواد.</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-xl font-bold mb-6">روابط سريعة</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors duration-300" onclick="navigateTo('home')">الرئيسية</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors duration-300" onclick="navigateTo('subjects')">المواد الدراسية</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors duration-300" onclick="navigateTo('ask')">اطرح سؤالاً</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors duration-300" onclick="navigateTo('faq')">الأسئلة الشائعة</a></li>
+                    </ul>
+                </div>
+
+                <!-- Subjects -->
+                <div>
+                    <h4 class="text-xl font-bold mb-6">المواد الدراسية</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors duration-300" onclick="navigateTo('math')">الرياضيات</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors duration-300" onclick="navigateTo('science')">العلوم</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors duration-300" onclick="navigateTo('arabic')">اللغة العربية</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors duration-300" onclick="navigateTo('english')">اللغة الإنجليزية</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="text-xl font-bold mb-6">النشرة البريدية</h4>
+                    <p class="text-gray-300 mb-4">اشترك في نشرتنا البريدية للحصول على آخر الأسئلة والإجابات.</p>
+                    <div class="flex">
+                        <input type="email" 
+                               placeholder="بريدك الإلكتروني" 
+                               class="flex-grow px-4 py-2 rounded-r-lg focus:outline-none text-dark">
+                        <button class="bg-primary text-white px-4 py-2 rounded-l-lg hover:bg-blue-700 transition-colors duration-300">
+                            اشترك
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+                <p class="text-gray-300">© ٢٠٢٤ موقع مساعدة التلاميذ. جميع الحقوق محفوظة.</p>
+                <p class="text-gray-400 text-sm mt-2">صمم بحب لمساعدة التلاميذ في رحلتهم التعليمية</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="fixed bottom-0 left-0 right-0 bg-dark text-white p-4 shadow-lg z-50 hidden">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-4 md:mb-0 md:mr-4">
+                    <p class="text-gray-300">نستخدم ملفات تعريف الارتباط لتحسين تجربتك على موقعنا. باستمرارك في التصفح، فإنك توافق على استخدامنا لملفات تعريف الارتباط.</p>
+                </div>
+                <div class="flex space-x-4 space-x-reverse">
+                    <button onclick="acceptCookies()" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300">
+                        موافق
+                    </button>
+                    <button onclick="declineCookies()" class="bg-gray-700 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors duration-300">
+                        رفض
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Define data at the beginning
+        const subjectsData = [
+            { "id": 1, "name": "الرياضيات", "color": "primary", "icon": "fa-calculator", "questions": 1500 },
+            { "id": 2, "name": "العلوم", "color": "secondary", "icon": "fa-flask", "questions": 1200 },
+            { "id": 3, "name": "اللغة العربية", "color": "accent", "icon": "fa-language", "questions": 900 },
+            { "id": 4, "name": "اللغة الإنجليزية", "color": "purple-500", "icon": "fa-globe", "questions": 1100 },
+            { "id": 5, "name": "الدراسات الاجتماعية", "color": "red-500", "icon": "fa-landmark", "questions": 800 },
+            { "id": 6, "name": "الحاسوب", "color": "green-500", "icon": "fa-code", "questions": 700 }
+        ];
+
+        const recentQuestions = [
+            { 
+                "id": 1, 
+                "subject": "رياضيات", 
+                "subjectColor": "primary",
+                "title": "كيف أحل معادلة من الدرجة الثانية؟", 
+                "content": "أحتاج إلى شرح طريقة حل المعادلات التربيعية باستخدام المميز...",
+                "grade": "الصف التاسع",
+                "time": "قبل ساعتين"
+            },
+            { 
+                "id": 2, 
+                "subject": "علوم", 
+                "subjectColor": "secondary",
+                "title": "ما هي عملية البناء الضوئي؟", 
+                "content": "أريد شرحاً مفصلاً لعملية البناء الضوئي في النباتات...",
+                "grade": "الصف السادس",
+                "time": "قبل ٥ ساعات"
+            },
+            { 
+                "id": 3, 
+                "subject": "لغة عربية", 
+                "subjectColor": "accent",
+                "title": "ما الفرق بين كان وأخواتها وإن وأخواتها؟", 
+                "content": "أحتاج إلى شرح الفرق مع أمثلة توضيحية...",
+                "grade": "الصف الثامن",
+                "time": "قبل يوم"
+            }
+        ];
+
+        const faqData = [
+            {
+                "id": 1,
+                "question": "كيف يمكنني الحصول على إجابة لسؤالي؟",
+                "answer": "يمكنك الحصول على إجابة لسؤالي من خلال:<ol class=\"list-decimal mr-4 mt-2 space-y-2\"><li>استخدام مربع البحث للبحث عن سؤال مشابه</li><li>تصفح الأسئلة في قسم المواد الدراسية</li><li>إرسال سؤالك الجديد من خلال نموذج \"اطرح سؤالاً\"</li></ol>"
+            },
+            {
+                "id": 2,
+                "question": "كم تستغرق الإجابة على السؤال؟",
+                "answer": "نحن نعمل على الإجابة على جميع الأسئلة خلال ٢٤ ساعة كحد أقصى. الأسئلة البسيطة قد تحصل على إجابة خلال ساعات قليلة، بينما الأسئلة المعقدة قد تحتاج إلى وقت أطول قليلاً."
+            },
+            {
+                "id": 3,
+                "question": "هل الخدمة مجانية؟",
+                "answer": "نعم، الخدمة مجانية بالكامل لجميع التلاميذ. نحن نؤمن بحق كل تلميذ في الحصول على المساعدة التعليمية التي يحتاجها."
+            },
+            {
+                "id": 4,
+                "question": "من يجيب على الأسئلة؟",
+                "answer": "يتم الإجابة على الأسئلة من قبل:<ul class=\"list-disc mr-4 mt-2 space-y-2\"><li>معلمين مؤهلين في مختلف التخصصات</li><li>طلاب جامعيين متخصصين</li><li>متطوعين من ذوي الخبرة التعليمية</li></ul>"
+            },
+            {
+                "id": 5,
+                "question": "هل يمكنني طرح أسئلة في جميع المواد؟",
+                "answer": "نعم، يمكنك طرح أسئلة في جميع المواد الدراسية من الصف الأول إلى الصف الثاني عشر. نحن نغطي جميع المناهج الدراسية المعتمدة."
+            }
+        ];
+
+        // Navigation function
+        function navigateTo(section) {
+            event.preventDefault();
+            const element = document.getElementById(section);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // FAQ toggle function
+        function toggleFAQ(id) {
+            const content = document.getElementById(`faq-content-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+
+        // Cookie consent functions
+        function acceptCookies() {
+            document.getElementById('cookieConsent').classList.add('hidden');
+            localStorage.setItem('cookiesAccepted', 'true');
+        }
+
+        function declineCookies() {
+            document.getElementById('cookieConsent').classList.add('hidden');
+            localStorage.setItem('cookiesAccepted', 'false');
+        }
+
+        // Check cookie consent on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show cookie consent if not set
+            if (!localStorage.getItem('cookiesAccepted')) {
+                setTimeout(() => {
+                    document.getElementById('cookieConsent').classList.remove('hidden');
+                }, 2000);
+            }
+
+            // Handle question form submission
+            const questionForm = document.getElementById('questionForm');
+            if (questionForm) {
+                questionForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const subject = document.getElementById('subject').value;
+                    const grade = document.getElementById('grade').value;
+                    const question = document.getElementById('question').value;
+                    
+                    if (!subject || !grade || !question) {
+                        alert('يرجى ملء جميع الحقول المطلوبة');
+                        return;
+                    }
+                    
+                    // In a real application, you would send this data to a server
+                    alert('تم إرسال سؤالك بنجاح! سنقوم بالرد عليك خلال ٢٤ ساعة.');
+                    questionForm.reset();
+                });
+            }
+
+            // Handle contact form submission
+            const contactForm = document.querySelector('form');
+            if (contactForm && contactForm !== questionForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('تم إرسال رسالتك بنجاح! سنقوم بالرد عليك في أقرب وقت.');
+                    contactForm.reset();
+                });
+            }
+
+            // Handle newsletter subscription
+            const newsletterBtn = document.querySelector('footer button');
+            if (newsletterBtn) {
+                newsletterBtn.addEventListener('click', function() {
+                    const emailInput = this.previousElementSibling;
+                    if (emailInput.value && emailInput.value.includes('@')) {
+                        alert('شكراً للاشتراك في نشرتنا البريدية!');
+                        emailInput.value = '';
+                    } else {
+                        alert('يرجى إدخال بريد إلكتروني صحيح');
+                    }
+                });
+            }
+        });
+
+        // Search functionality
+        document.querySelector('header button').addEventListener('click', function() {
+            const searchInput = this.previousElementSibling;
+            const searchTerm = searchInput.value.trim();
+            
+            if (searchTerm) {
+                alert(`جاري البحث عن: "${searchTerm}"`);
+                // In a real application, you would perform the search here
+                searchInput.value = '';
+            }
+        });
+
+        // Image upload preview
+        const imageInput = document.getElementById('image');
+        if (imageInput) {
+            imageInput.addEventListener('change', function(e) {
+                if (e.target.files && e.target.files[0]) {
+                    const fileName = e.target.files[0].name;
+                    alert(`تم اختيار الصورة: ${fileName}`);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
